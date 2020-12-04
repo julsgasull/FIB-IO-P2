@@ -29,21 +29,7 @@ for {k in 1 .. card(NODES)} {
   for {i in NODES, j in NODES} {
     if d[i,j] > d[i,k] + d[k,j] then {
       let d[i,j] := d[i,k] + d[k,j];
-      let pred[i,j] := pred[k,j];
-   
-      # Test for negative-cost cycles
-      if (i == j) and (d[i,j] < 0) then {
-        let neg_cycle_found := 1;
-        printf "Negative-Cost Cycle Found:\n";
-        let n1 := pred[i,i];
-        let n2 := i;
-        repeat {
-          printf "Arc (%d,%d) has cost %d\n",n1,n2,c[n1,n2];
-          let n2 := n1;
-          let n1 := pred[i,n1];
-        } until n1 == i;
-        printf "Arc (%d,%d) has cost %d\n",n1,n2,c[n1,n2];
-     }
+      
 
     } # if d[i,j] > d[i,k] + d[k,j]
   } # for {i in NODES, j in NODES}

@@ -1,1 +1,26 @@
-prueba
+reset;
+
+model netdes.mod;
+data netdes.dat;
+
+param d {N,N} default Infinity;      # The distance matrix d
+
+# Initialization
+for {i in N}
+  let d[i,i] := 0;
+
+for {(i,j) in A} {
+  let d[i,j] := c[i,j];
+}
+
+for {l in 1 .. card(N)} {
+  for {i in N, j in N} {
+    if d[i,j] > d[i,l] + d[l,j] then {
+      let d[i,j] := d[i,l] + d[l,j];
+    }
+  }
+}
+option display_1col 24;
+display d;
+option display_1col 24;
+display c;
