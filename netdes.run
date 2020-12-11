@@ -20,7 +20,5 @@ for {l in 1 .. card(N)} {
     }
   }
 }
-option display_1col 24;
 display d;
-option display_1col 24;
 display c;
