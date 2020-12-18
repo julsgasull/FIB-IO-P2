@@ -1,6 +1,6 @@
 #set of nodos
 set NODES := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24;
-
+set CLIENTS := 3 5 8 11 12 13 14 17 18 19 21 23;
 #set of  origins
 set ORIGIN := 3;
 
@@ -85,19 +85,19 @@ param ycoord:= 	1 1
 		24 8;
 
 #right hand side at nodes
-param demand default 0:=
-               3    110 /* Valor modificable */
-               5    -10
-               8    -10
-               11   -10
-               12   -10
-               13   -10
-               14   -10
-               17   -10
-               18   -10
-               19   -10
-               21   -10
-               23		-10;
+param demand :=
+               3    -110 /* Valor modificable */
+               5    10
+               8    10
+               11   10
+               12   10
+               13   10
+               14   10
+               17   10
+               18   10
+               19   10
+               21   10
+               23		10;
 
 
 param C := 40;
