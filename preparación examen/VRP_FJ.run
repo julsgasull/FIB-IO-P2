@@ -1,0 +1,40 @@
+reset;
+
+model VRP_FJ.mod;
+data VRP_FJ.dat;
+
+/*
+for {k in 1..K} {
+  for {i in CLIENTS} {
+      if y[i,k] = 1 then {
+        let NS[k] := NS[k] union {i};
+      }
+  }
+  let NS[k] := NS[k] union {4};
+}*/
+
+
+for {k in 1..K} {
+  for {i in CLIENTS} {
+    if k = 1 then{
+      let d[i,k] := cost[4,i] + cost[i,1] - cost[4,1];
+    }
+    if k = 2 then{
+      let d[i,k] := cost[4,i] + cost[i,6] - cost[4,6];
+    }
+    #Añadir mas if's si hay mas vehiculos
+  }
+}
+
+let d[1,1] := 0;
+let d[6,2] := 0;
+
+#let d[6,1] := Infinity;
+#let d[5,2] := Infinity;
+
+option solver './gurobi';
+solve;
+
+display y;
+
+for {(i,k) in CLIENTS cross 1..K} if y[i,k] >= 1 then {printf "%i in route %i\n", i, k};
