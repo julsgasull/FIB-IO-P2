@@ -1,0 +1,20 @@
+reset;
+
+model examen.mod;
+data examen.dat;
+option cplex_options 'time=60';
+option solver cplex;
+
+display cost;
+
+display cost;
+
+option solver cplex;
+solve;
+
+for {(i,j) in NODES cross NODES}{
+  # x es la variable de decision
+  if x[i,j] >= 1 then {
+    printf "%i --> %i\n", i, j;
+  };
+};
