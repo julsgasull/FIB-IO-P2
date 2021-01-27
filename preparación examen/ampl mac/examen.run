@@ -1,0 +1,40 @@
+reset;
+
+model examen.mod;
+data examen.dat;
+#data examen-addicional.dat;
+# option cplex_options 'time=60';
+
+for {i in 1..N} {
+  for {k in 1..K} {
+    if (i != 5 and i != 11) then {
+      if (k == 1) then {
+        let d[i,k] := c[4,i] + c[i,5] - c[4,5];
+      }
+      else {
+        let d[i,k] := c[4,i] + c[i,11] - c[4,11];
+      }
+    }
+  }
+}
+for {k in 1..K} {
+  let d[5,k] := 0;
+  let d[11,k] := 0;
+}
+display d;
+/*
+for {(i,j) in ARCS} {
+  let cost[i,j] := 95 + (xcoord[i]-xcoord[j])**2 + 8*((ycoord[i]-ycoord[j])**2);
+}
+*/
+
+option solver './gurobi';
+solve;
+
+
+for {(i,j) in 1..N cross 1..N}{
+  # x es la variable de decision
+  if y[i,j] >= 1 then {
+    printf "%i --> %i\n", i, j;
+  };
+};

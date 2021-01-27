@@ -1,0 +1,14 @@
+reset;
+
+model examenaddicional.mod;
+data examenaddicional.dat;
+
+option solver './gurobi';
+solve;
+
+for {(i,j) in CLIENTS cross CLIENTS}{
+  # x es la variable de decision
+  if y[i,j] >= 1 then {
+    printf "%i --> %i\n", i, j;
+  };
+};
